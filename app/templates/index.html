@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DevOps Monitoring Dashboard</title>
+
+    <!-- Auto refresh every 10 sec -->
+    <meta http-equiv="refresh" content="10">
+
+    <style>
+        body { font-family: Arial; background: #111; color: white; text-align: center; }
+        .card { background: #222; padding: 20px; margin: 20px; border-radius: 10px; }
+        h1 { color: #00ffcc; }
+        .up { color: #00ff00; font-weight: bold; }
+        .down { color: #ff4c4c; font-weight: bold; }
+    </style>
+</head>
+
+<body>
+
+<h1>🚀 DevOps Monitoring Dashboard</h1>
+<p>Last Updated: {{ data.time }}</p>
+
+<div class="card">
+    <h2>System Usage</h2>
+    <p>CPU Usage: {{ data.cpu }}%</p>
+    <p>Memory Usage: {{ data.memory }}%</p>
+    <p>Disk Usage: {{ data.disk }}%</p>
+</div>
+
+<div class="card">
+    <h2>Server Status</h2>
+    {% for server, status in data.servers.items() %}
+        <p>
+            {{ server }} →
+            <span class="{{ 'up' if status == 'UP' else 'down' }}">
+                {{ status }}
+            </span>
+        </p>
+    {% endfor %}
+</div>
+
+</body>
+</html>
